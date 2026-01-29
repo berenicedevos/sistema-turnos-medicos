@@ -26,258 +26,166 @@ const horarios = [
 ];
 
 // ARRAY PARA GUARDAR TURNO AGENDADOS
-const turnosAgendados = [];
+const turnosAgendados = JSON.parse(localStorage.getItem("turnos")) || [];
+document.addEventListener("DOMContentLoaded", mostrarTurnos);
 
-MenuPrincipal = parseInt(prompt("Menú principal:\n\n" +
-      "1. Agendar nuevo turno\n" +
-      "2. Ver turnos agendados\n" +
-      "3. Salir"))
+//Borra turnos agendados
+//const turnosAgendados = [];   
+//localStorage.removeItem("turnos");
+//turnosAgendados.length = 0;  
+//listaTurnos.innerHTML = ""; 
 
-while(MenuPrincipal !==3){
-    switch(MenuPrincipal){
-        case 1: 
-        let especialidadElegida2= elegirEspecialidad()
-        console.log(especialidadElegida2)
-        
-        horaElegida = elegirHorario()
-        console.log(horaElegida)
 
-        let {nombrePaciente, apellidoPaciente, dniPaciente,} = pedirDatosPacientes();
+// CONEXION CON DOM
+const selectEspecialidad = document.getElementById("especialidad");
+const selectHorario = document.getElementById("horario");
+const formTurno = document.getElementById("formTurno");
+const mensaje = document.getElementById("mensaje");
+const listaTurnos = document.getElementById("listaTurnos");
+const inputNombre = document.getElementById("nombre");
+const inputApellido = document.getElementById("apellido");
+const inputDni = document.getElementById("dni");
 
-        console.log(nombrePaciente, apellidoPaciente, dniPaciente)
+// CARGA LOS VALORES DE LA LISTA DESPLEGABLE
+especialidad.forEach(e => {
+  const option = document.createElement("option");
+  option.value = e.nombre;
+  option.textContent = e.nombre;
+  selectEspecialidad.appendChild(option);
+});
 
-        confirmarTruno(especialidadElegida2, nombrePaciente, apellidoPaciente, dniPaciente, horaElegida)
-        
-        alert("Volviendo al menú principal...")
-        break
-            
-        case 2: 
-        mostrarTurnos()
-        // let ListaDeTurnos = ""
-        // for const turnito of turnosAgendados{
-        //     ListaDeTurnos += turnito.especialidad
-        // }
-        // alert(ListaDeTurnos)
-        break
+horarios.forEach(h => {
+  const option = document.createElement("option");
+  option.value = h;
+  option.textContent = h;
+  selectHorario.appendChild(option);
+});
 
-        default:
-            alert("Opcion incorrecta")
-    }
+//FORMULARIO TURNO (EVENTO SUBMIT)
+formTurno.addEventListener("submit", function (evento) {
+  evento.preventDefault();
 
-MenuPrincipal = parseInt(prompt("Menú principal:\n\n" +
-      "1. Agendar nuevo turno\n" +
-      "2. Ver turnos agendados\n" +
-      "3. Salir"))
+  const especialidadSeleccionada = selectEspecialidad.value;
+  const horarioSeleccionado = selectHorario.value;
+  const nombre = inputNombre.value.trim().toUpperCase();
+  const apellido = inputApellido.value.trim().toUpperCase();
+  const dni = parseInt(inputDni.value.trim());
 
-}      
+  //Valido datos del paciente
+  const esValido = validarDatosPacientes(nombre, apellido, dni)
+  if (!esValido) return;
+
+  //Verifico si el turno esta ocupado
+  if (turnoOcupado(especialidadSeleccionada, horarioSeleccionado)) {
+    mostrarError("El horario ya se encuentra ocupado para la especialidad seleccionada");
+    return;
+  }
+
+  //Agendo el turno
+  const turno = {
+  especialidad: especialidadSeleccionada,
+  horario: horarioSeleccionado,
+  nombre: nombre,
+  apellido: apellido,
+  dni: dni
+  };
+
+  turnosAgendados.push(turno);
+  localStorage.setItem("turnos", JSON.stringify(turnosAgendados));
+
+  mostrarExito("El turno se ha agendado correctamente")
+  formTurno.reset();
+
+  //Actualizo la lista de turnos agendados
+  mostrarTurnos();
+});
+
+
+
 //----------------------------------------FUNCIONES--------------------------------------------
-// FUNCIÓN 1: Elegir especialidad
-function elegirEspecialidad() {
-    let texto = ""
 
-for (const e of especialidad) {
-  texto += e.id + ". " + e.nombre + "\n"
-}
-  
-  let opcion = parseInt(prompt("Elija una especialidad:\n" + texto))
-  let flag = 0
-  let especialidadElegida = ""
+// FUNCIÓN 1: Validar datos del paciente
+function validarDatosPacientes(nombrePaciente, apellidoPaciente, dniPaciente){
 
-  while (flag === 0) {
-    switch (opcion) {
-      case 1:
-        especialidadElegida = especialidad[0].nombre;
-        flag = 1
-        break
+    if (nombrePaciente === "" ||nombrePaciente === null || isNaN(nombrePaciente)===false){
+       mostrarError("El nombre ingresado es inválido")
+        return false
+    }  
 
-      case 2:
-        especialidadElegida = especialidad[1].nombre;
-        flag = 1
-        break
-
-      case 3:
-        especialidadElegida = especialidad[2].nombre;
-        flag = 1
-        break
-        
-      case 4:
-        especialidadElegida = especialidad[3].nombre;
-        flag = 1
-        break
-        
-      case 5:
-        especialidadElegida = especialidad[4].nombre;
-        flag = 1
-        break
-        
-      case 6:
-        especialidadElegida = especialidad[5].nombre;
-        flag = 1
-        break
-        
-      case 7:
-        especialidadElegida = especialidad[6].nombre;
-        flag = 1
-        break
-        
-      case 8:
-        especialidadElegida = especialidad[7].nombre;
-        flag = 1
-        break
-        
-      case 9:
-        especialidadElegida = especialidad[8].nombre
-        flag = 1
-        break
-        
-      case 10:
-        especialidadElegida = especialidad[9].nombre
-        flag = 1
-        break
-        
-      case 11:
-        especialidadElegida = especialidad[10].nombre
-        flag = 1
-        break
-        
-      case 12:
-        especialidadElegida = especialidad[11].nombre
-        flag = 1;
-        break;
-        
-      default:
-        alert("La especialidad seleccionada no existe")
-        opcion = parseInt(prompt("Elija una especialidad:\n" + texto))
-        break
+    if (apellidoPaciente === "" ||apellidoPaciente === null || !isNaN(apellidoPaciente)){
+       mostrarError("El apellido ingresado es inválido")
+      return false
     }
-  }
 
-  return especialidadElegida;
+    if (dniPaciente === "" || dniPaciente===null || isNaN(dniPaciente)===true || dniPaciente<10000 || dniPaciente>1000000000){
+      mostrarError("El DNI ingresado es inválido")
+      return false
+    } 
+  return true
 }
 
-
-function elegirHorario() {
-  let texto = "Horarios disponibles:\n";
-
-  for (let i = 0; i < horarios.length; i++) {
-    texto += (i + 1) + ". " + horarios[i] + "\n"
-  }
-
-  let opcion = parseInt(prompt("Elija un horario:\n" + texto));
-  let flag = 0;
-  let horarioElegido = ""
-
-  while (flag === 0) {
-    switch (opcion) {
-      case 1:
-        horarioElegido = horarios[0];
-        flag = 1
-        break
-      case 2:
-        horarioElegido = horarios[1];
-        flag = 1
-        break
-      case 3:
-        horarioElegido = horarios[2];
-        flag = 1
-        break
-      case 4:
-        horarioElegido = horarios[3];
-        flag = 1
-        break
-      case 5:
-        horarioElegido = horarios[4];
-        flag = 1
-        break
-      case 6:
-        horarioElegido = horarios[5];
-        flag = 1
-        break
-      case 7:
-        horarioElegido = horarios[6];
-        flag = 1
-        break
-      default:
-        alert("Horario inválido");
-        opcion = parseInt(prompt("Elija un horario:\n" + texto))
-        break
-    }
-  }
-
-  return horarioElegido;
+// FUNCIÓN 2: Verficar si el turno esta ocupado
+function turnoOcupado(especialidad, horario) {
+  return turnosAgendados.some(turno =>
+    turno.especialidad === especialidad &&
+    turno.horario === horario
+  );
 }
 
-// FUNCIÓN 3: Cargar datos del paciente
-function pedirDatosPacientes(){
-    let nombrePaciente = prompt("Ingrese nombre del paciente:") 
-    while (nombrePaciente === "" ||nombrePaciente === null || isNaN(nombrePaciente)===false){
-       nombrePaciente = prompt("Ingrese un nombre válido para el paciente:") 
-    }
-    nombrePaciente = nombrePaciente.toUpperCase()
-
-    let apellidoPaciente = prompt("Ingrese apellido del paciente:")
-    while (apellidoPaciente === "" ||apellidoPaciente === null || !isNaN(apellidoPaciente)){
-       apellidoPaciente = prompt("Ingrese un apellido válido para el paciente:") 
-    }
-    apellidoPaciente = apellidoPaciente.toUpperCase()
-
-    let dniPaciente = prompt("Ingrese DNI del paciente:")
-    while (dniPaciente === "" || dniPaciente===null || isNaN(dniPaciente)===true || dniPaciente<10000 || dniPaciente>1000000000){
-    dniPaciente = prompt("Ingrese un DNI válido para el paciente:") 
-    }
-    dniPaciente = parseInt(dniPaciente)
-
-
-    return {nombrePaciente,apellidoPaciente,dniPaciente}
+// FUNCIÓN 3: Mostrar mensaje de error al agendar turno
+function mostrarError(texto) {
+  mensaje.textContent = texto;
+  mensaje.className = "alert alert-danger";
+  mensaje.classList.remove("d-none");
 }
 
-// FUNCIÓN 4: Confirmar turno
-function confirmarTruno(espe, nompac,apepac,dnipac, hora){
-
-    let confirmacion = confirm("Confirmación del turno: \n\n Especialidad: "+ espe+ "\n Paciente: " + apepac+", "+ nompac+" - DNI: "+ dnipac +"\n Horario: "+ hora+ "\n\n ¿Desea confirmar el turno?")
-
-    if (confirmacion==true){
-        alert("Turno confirmado. ¡Gracias!")
-        console.log("Turno confirmado: \n"+ espe+"\n"+ apepac+", "+ nompac+" - DNI: "+ dnipac+"\n"+hora )
-
-        turnosAgendados.push({
-                    especialidad: espe,
-                    nombre: nompac,
-                    apellido: apepac,
-                    dni: dnipac,
-                    horario: hora
-        })
-
-    }
-    else{
-            alert("Turno cancelado")
-    console.log("Turno cancelado")
-    }
-
+// FUNCIÓN 4: Mostrar mensaje de exito al agendar turno
+function mostrarExito(texto) {
+  mensaje.textContent = texto;
+  mensaje.className = "alert alert-success";
+  mensaje.classList.remove("d-none");
 }
 
-// FUNCIÓN 5: Mostrar turnos agendados
+// FUNCIÓN 5: Mostrar turnos
 function mostrarTurnos() {
-  if (turnosAgendados.length === 0) {
-    alert("No hay turnos agendados")
-    console.log("No hay turnos agendados")
-  } else {
-    let ListaTurnos = "Turnos agendados: \n\n"
-    turnosAgendados.sort((a,b) => a.horario.localeCompare(b.horario))
-    console.log("TURNOS AGENDADOS:")
-    for (const turno of turnosAgendados) {
-      console.log(
-        turno.horario +" - " +
-        turno.especialidad +" - " +
-        turno.apellido +", " +
-        turno.nombre +" (DNI " +turno.dni +")"
-      )
-      ListaTurnos += 
-        turno.horario +" - " +
-        turno.especialidad +" - " +
-        turno.apellido +", " +
-        turno.nombre +" (DNI " +turno.dni +") \n"
-    }
-    alert(ListaTurnos)
+  listaTurnos.innerHTML = "";
+
+  const turnosAgrupados = agruparTurnosPorEspecialidad(turnosAgendados);
+
+  for (const especialidad in turnosAgrupados) {
+    // Título de la especialidad
+    const titulo = document.createElement("li");
+    titulo.className = "list-group-item active";
+    titulo.textContent = especialidad;
+    listaTurnos.appendChild(titulo);
+
+  turnosAgrupados[especialidad].sort((a, b) => a.horario.localeCompare(b.horario));
+
+    // Turnos de esa especialidad
+    turnosAgrupados[especialidad].forEach(turno => {
+      const li = document.createElement("li");
+      li.className = "list-group-item";
+      li.textContent =
+        `${turno.horario} - ${turno.apellido}, ${turno.nombre} (DNI ${turno.dni})`;
+      listaTurnos.appendChild(li);
+    });
   }
 }
+
+
+// FUNCIÓN 5: Agrupar turnos por especialidad
+function agruparTurnosPorEspecialidad(turnos) {
+  const grupos = {};
+
+  turnos.forEach(turno => {
+    if (!grupos[turno.especialidad]) {
+      grupos[turno.especialidad] = [];
+    }
+
+    grupos[turno.especialidad].push(turno);
+  });
+
+  return grupos;
+}
+
+
