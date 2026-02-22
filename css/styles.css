@@ -4,19 +4,31 @@
   font-style: normal;
 }
 
+.container{
+    padding: 3rem 2rem;
+}
 .container-agendar, .container-turnos-agendados{
     display: flex;
     width: 100%;
     flex-direction: column;
+    background-color: #dfeff8; 
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    
 }
 
 @media only screen and (min-width: 992px) {
-    .container-agendar, .container-turnos-agendados{
-    width: 50%;
-}
+    .container-agendar {
+        width: 35%; 
+
+    }
+
+    .container-turnos-agendados {
+        width: 65%; 
+    }
     .todo{
         display: flex;
         flex-direction: row;
-        gap: 6rem;
+        gap: 2rem;
     }
 }

@@ -1,0 +1,169 @@
+[
+  {
+    "id": 100,
+    "nombre": "Cardiología",
+    "medicos": [
+      {
+        "id": 1,
+        "nombre": "Eugenia Inés Artola",
+        "dias": [
+          { "dia": 2, "desde": "09:00", "hasta": "12:00", "intervalo": 30 },
+          { "dia": 5, "desde": "15:00", "hasta": "19:00", "intervalo": 30 }
+        ]
+      },
+      {
+        "id": 13,
+        "nombre": "Esteban Gabriel Puebla",
+        "dias": [
+          { "dia": 1, "desde": "09:00", "hasta": "14:00", "intervalo": 30 },
+          { "dia": 2, "desde": "09:00", "hasta": "13:00", "intervalo": 30 },
+          { "dia": 4, "desde": "10:00", "hasta": "15:00", "intervalo": 30 },
+          { "dia": 6, "desde": "09:00", "hasta": "16:00", "intervalo": 30 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 110,
+    "nombre": "Neurología",
+    "medicos": [
+      {
+        "id": 2,
+        "nombre": "María Alejandra Coria",
+        "dias": [
+          { "dia": 1, "desde": "10:00", "hasta": "12:00", "intervalo": 20 },
+          { "dia": 2, "desde": "10:00", "hasta": "12:00", "intervalo": 20 },
+          { "dia": 3, "desde": "09:00", "hasta": "11:00", "intervalo": 20 },
+          { "dia": 4, "desde": "18:00", "hasta": "19:00", "intervalo": 20 }
+        ]
+      },
+      {
+        "id": 23,
+        "nombre": "Alexander Takhmanov",
+        "dias": [{ "dia": 2, "desde": "13:00", "hasta": "19:00", "intervalo": 20 }]
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "nombre": "Endocrinología",
+    "medicos": [
+      { "id": 3, "nombre": "Mario Carlos Herrera", "dias": [{ "dia": 5, "desde": "08:00", "hasta": "10:00", "intervalo": 15 }] }
+    ]
+  },
+  {
+    "id": 130,
+    "nombre": "Traumatología",
+    "medicos": [
+      { "id": 29, "nombre": "Ricardo Javier Zalazar", "dias": [{ "dia": 4, "desde": "17:00", "hasta": "21:00", "intervalo": 15 }] },
+      { "id": 10, "nombre": "Felix Peralta", "dias": [
+          { "dia": 2, "desde": "17:00", "hasta": "20:00", "intervalo": 15 },
+          { "dia": 4, "desde": "09:00", "hasta": "15:00", "intervalo": 15 }
+      ]}
+    ]
+  },
+  {
+    "id": 140,
+    "nombre": "Reumatología",
+    "medicos": [
+      { "id": 4, "nombre": "Adrián Walter Guerra", "dias": [{ "dia": 1, "desde": "10:00", "hasta": "14:00", "intervalo": 30 }] },
+      { "id": 5, "nombre": "Jose Luis Molina", "dias": [{ "dia": 5, "desde": "08:00", "hasta": "11:00", "intervalo": 20 }] },
+      { "id": 10, "nombre": "Felix Peralta", "dias": [{ "dia": 3, "desde": "08:00", "hasta": "11:00", "intervalo": 20 }] }
+    ]
+  },
+  {
+    "id": 150,
+    "nombre": "Dermatología",
+    "medicos": [
+      { "id": 6, "nombre": "Andriana Marcela Montero", "dias": [
+          { "dia": 2, "desde": "08:00", "hasta": "12:00", "intervalo": 20 },
+          { "dia": 4, "desde": "14:00", "hasta": "16:00", "intervalo": 30 }
+      ]}
+    ]
+  },
+  {
+    "id": 160,
+    "nombre": "Rehabilitación",
+    "medicos": [
+      {
+        "id": 7,
+        "nombre": "Silvia Beatriz Nilsen",
+        "dias": [
+          { "dia": 1, "desde": "07:00", "hasta": "16:00", "intervalo": 30 },
+          { "dia": 2, "desde": "07:00", "hasta": "16:00", "intervalo": 30 },
+          { "dia": 3, "desde": "07:00", "hasta": "16:00", "intervalo": 30 },
+          { "dia": 4, "desde": "07:00", "hasta": "16:00", "intervalo": 30 },
+          { "dia": 5, "desde": "07:00", "hasta": "16:00", "intervalo": 30 }
+        ]
+      },
+      {
+        "id": 2,
+        "nombre": "María Alejandra Coria",
+        "dias": [
+          { "dia": 1, "desde": "16:00", "hasta": "20:00", "intervalo": 30 },
+          { "dia": 2, "desde": "16:00", "hasta": "20:00", "intervalo": 30 },
+          { "dia": 6, "desde": "08:00", "hasta": "12:00", "intervalo": 30 }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 170,
+    "nombre": "Obstetricia",
+    "medicos": [
+      { "id": 8, "nombre": "Gabriel Enrique Ochoa", "dias": [
+          { "dia": 5, "desde": "12:00", "hasta": "20:00", "intervalo": 60 },
+          { "dia": 2, "desde": "08:00", "hasta": "14:00", "intervalo": 60 }
+      ]}
+    ]
+  },
+  {
+    "id": 180,
+    "nombre": "Clínica",
+    "medicos": [
+      { "id": 4, "nombre": "Adrián Walter Guerra", "dias": [
+          { "dia": 1, "desde": "17:00", "hasta": "21:00", "intervalo": 30 },
+          { "dia": 3, "desde": "07:00", "hasta": "12:00", "intervalo": 30 }
+      ]},
+      { "id": 6, "nombre": "Andriana Marcela Montero", "dias": [
+          { "dia": 3, "desde": "15:00", "hasta": "20:00", "intervalo": 30 },
+          { "dia": 6, "desde": "10:00", "hasta": "12:00", "intervalo": 30 },
+          { "dia": 2, "desde": "17:00", "hasta": "20:00", "intervalo": 30 }
+      ]},
+      { "id": 33, "nombre": "Claudio Fabian Andino", "dias": [
+          { "dia": 4, "desde": "08:00", "hasta": "10:00", "intervalo": 15 },
+          { "dia": 2, "desde": "12:00", "hasta": "19:00", "intervalo": 15 }
+      ]}
+    ]
+  },
+  {
+    "id": 190,
+    "nombre": "Fisiatría / Kinesio",
+    "medicos": [
+      { "id": 10, "nombre": "Felix Peralta", "dias": [{ "dia": 2, "desde": "12:00", "hasta": "16:00", "intervalo": 30 }] }
+    ]
+  },
+  {
+    "id": 200,
+    "nombre": "Fonoaudiología",
+    "medicos": [
+      { "id": 21, "nombre": "María Fernanada Suarez", "dias": [{ "dia": 2, "desde": "13:00", "hasta": "20:00", "intervalo": 15 }] },
+      { "id": 23, "nombre": "Alexander Takhmanov", "dias": [{ "dia": 2, "desde": "07:00", "hasta": "12:00", "intervalo": 15 }] }
+    ]
+  },
+  {
+    "id": 210,
+    "nombre": "Psicología",
+    "medicos": [
+      {
+        "id": 20,
+        "nombre": "Claudia Elisa Ruiz",
+        "dias": [
+          { "dia": 1, "desde": "12:00", "hasta": "16:00", "intervalo": 20 },
+          { "dia": 4, "desde": "10:00", "hasta": "15:00", "intervalo": 20 },
+          { "dia": 0, "desde": "07:00", "hasta": "13:00", "intervalo": 20 }
+        ]
+      }
+    ]
+  }
+]
