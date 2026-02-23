@@ -21,8 +21,8 @@ class Turno {
 
     constructor(nombre, apellido, dni, email, telefono, fechaNacimiento, especialidadId, especialidad, medicoId, medico, fecha, hora){
         this.id = Date.now();
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.nombre = nombre.trim().toUpperCase();
+        this.apellido = apellido.trim().toUpperCase();
         this.dni = dni;
         this.email = email;
         this.telefono = telefono;
@@ -329,8 +329,6 @@ Swal.fire({
     } 
    
 );
-
-
   }
 });
 
