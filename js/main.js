@@ -127,8 +127,6 @@ function CargaFechas() {
     selectFecha.innerHTML = '<option value="">Seleccione un día</option>';
     selectHorario.innerHTML = '<option value="">Seleccione un horario</option>';
 
-    //const diasNumeros = medicoElegido.dias.map(d => d.dia);
-
     let hoy = new Date();
 
 for (let i = 0; i < 30; i++) {

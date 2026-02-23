@@ -43,7 +43,6 @@ function filtrarYMostrar() {
 
     if (fechaElegida !== "") {
 
-
         turnosFiltrados = turnosFiltrados.filter(t => 
             t.fecha === fechaElegida
         );
@@ -184,7 +183,6 @@ Swal.fire({
     });
     localStorage.setItem("turnos", JSON.stringify(turnosAgendados));
     filtrarYMostrar();
-
 
     Swal.fire({
       title: "Turno actualizado",
